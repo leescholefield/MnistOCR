@@ -7,8 +7,9 @@ namespace Console
     class Program
     {
 
-        private static readonly string TEST_SET_LOC = "C:/Users/leesc/source/repos/OCR/Core/Dataset/TestModels/mnist_test.csv";
-        private static readonly string TRAINED_DATA_DIR = "C:/Users/leesc/source/repos/OCR/Core/Dataset/TrainedModels";
+        private static readonly string TEST_SET_LOC = "Dataset/TestModels/mnist_test.csv";
+        private static readonly string TRAIN_SET_LOC = "Dataset/TestModels/mnist_train.csv";
+        private static readonly string TRAINED_DATA_DIR = "Dataset/TrainedModels";
 
         static void Main(string[] args)
         {
@@ -28,7 +29,7 @@ namespace Console
             {
                 var trainer = new MnistTrainer();
                 System.Console.WriteLine("Starting training");
-                trainer.Train("C:/Users/leesc/source/repos/OCR/Core/Dataset/TestModels/mnist_train.csv", "");
+                trainer.Train(TRAIN_SET_LOC, TRAINED_DATA_DIR);
             }
             else if (args[0] == "--test")
             {
