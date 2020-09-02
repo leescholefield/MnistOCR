@@ -23,17 +23,19 @@ https://pjreddie.com/projects/mnist-in-csv/
 
 For the 10,000 image testing set with a K=3.
 
-| Trained sample size*| Errors     | Error rate % | Runtime |
+| Trained sample size*| Errors     | Error rate % | Runtime**|
 | ------------------- | -----------|--------------| --------|
 | 100                 | 1658       | 16.58        | 3.41    |
-| 1000                | 770        | 7.7          | NA      |
-| 1500                | 695        | 6.95         | NA      |
-| 2000                | 640        | 6.4          | NA      |
-| 2500                | 590        | 5.89         | NA      |
+| 1000                | 770        | 7.7          | 8.54    |
+| 1500                | 695        | 6.95         | 11.42   |
+| 2000                | 640        | 6.4          | 15.58   |
+| 2500                | 590        | 5.89         | 18.41   |
 | 3000                | 578        | 5.77         | 37.34   |
 | 5000                | 521        | 5.21         | 1:02:24 |
 
 \* this is the number of histograms I have taken for each digit from the training data. So a sample size of 100 means I am comparing the test image to 100 examples of each digit.
+
+\** on a Lenovo Legion Y520 Intel Core i5-7300HQ. The timer starts after the trained data has been loaded into memory so the total program runtime will be longer.
 
 # Next Steps
 
