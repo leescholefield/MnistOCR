@@ -1,0 +1,104 @@
+﻿Benchmarks:
+
+With a model set of the first 100 distances in each 'Model' file:
+	K-means target: 31
+		-- Correct ==   7916 == (79.16)
+		-- Incorrect == 2084 == (20.84%)
+
+	Runtime: 3.43 mins
+	k-means 3:
+		correct: 8342
+		incorrect: 1658
+	k-means 11:
+		correct: 8263
+		incorrect: 1737
+		rtime: 3.41 mins
+	k-means 13:
+		correct: 8214
+		incorrect: 1786
+		rtime: 3.43
+	k-means 15:
+		correct: 8171
+		incorrect: 1829
+	k-means 17:
+		correct: 8118
+		incorrect: 1882
+	k-means 21:
+		correct: 8040
+		incorrect: 1960
+		rtime: 3.42
+
+All following not proper K-means - should be square root number of items:
+
+With a model set of the first 200 distances in each 'Model' file:
+	K-means target: 31
+		-- Correct ==   8330 == (83.3%)
+		-- Incorrect == 1670 == (16.7%)
+
+With a model set of the first 500 distances in each 'Model' file:
+	-- Correct ==   8769 == (87.69%)
+	-- Incorrect == 1231 == (12.31%)
+
+With a model set of the first 1000 distances in each 'Model' file:
+	Threaded code lowered time to 11.58 put played hell on CPU
+	k-means target: 31
+		-- Correct == 9009   == (90.09%)
+		-- Incorrect == 991 == (9.91%)
+
+		Runtime: 24.54
+	k-means target 101:
+		-- Correct == 8703   == 
+		-- Incorrect == 1297 == 
+
+		Runtime: 24.54
+
+	k-target 9:
+		- Correct == 9173   == 
+		-- Incorrect == 825 == 
+
+		Runtime: 24.37
+
+	k-target: 7:
+		- correct == 9189
+		- incorrect == 911
+	k-target: 5:
+		- correct == 9216
+		- incorrect == 784
+	k-target 3:
+		correct == 9230
+		incorrect == 770
+
+With a model set of the first 1500 distances in each 'Model' file:
+	k-means target: 3
+		-- Correct == 9305  == 93.05%
+		-- Incorrect == 695 == 6.95%
+
+		Runtime: 36.29
+
+With a model set of the first 2000 distances in each 'Model' file:
+	k-means target: 3
+		-- Correct == 9360  == 
+		-- Incorrect == 640 == 
+
+		Runtime: 48.03
+
+With a model set of the first 2500 distances in each 'Model' file:
+	k-means target: 3
+		-- Correct == 9410  == 
+		-- Incorrect == 590 == 
+
+		Runtime: 48.03
+
+With a model set of the first 3000 distances in each 'Model' file:
+	k-means target: 3
+		-- Correct == 9422  == 
+		-- Incorrect == 578 == 
+
+		Runtime: 37.34 (after async)
+
+with a model set of the first 5000 distances in each 'Model' file:
+	k-means 3:
+		-- correct == 9479 == 94.79%
+		-- incorrect == 521 == 5.21%
+
+		Runtime: 1:02:24 (after async)
