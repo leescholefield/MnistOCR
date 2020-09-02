@@ -73,7 +73,7 @@ With a model set of the first 1500 distances in each 'Model' file:
 		-- Correct == 9305  == 93.05%
 		-- Incorrect == 695 == 6.95%
 
-		Runtime: 36.29
+		Runtime: 11.42
 
 With a model set of the first 2000 distances in each 'Model' file:
 	k-means target: 3

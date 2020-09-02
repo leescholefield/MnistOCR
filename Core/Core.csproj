@@ -6,10 +6,50 @@
 
   <ItemGroup>
     <None Remove="Dataset\TestModels\mnist_test.csv" />
+    <None Remove="Dataset\TrainedModels\model_0.csv" />
+    <None Remove="Dataset\TrainedModels\model_1.csv" />
+    <None Remove="Dataset\TrainedModels\model_2.csv" />
+    <None Remove="Dataset\TrainedModels\model_3.csv" />
+    <None Remove="Dataset\TrainedModels\model_4.csv" />
+    <None Remove="Dataset\TrainedModels\model_5.csv" />
+    <None Remove="Dataset\TrainedModels\model_6.csv" />
+    <None Remove="Dataset\TrainedModels\model_7.csv" />
+    <None Remove="Dataset\TrainedModels\model_8.csv" />
+    <None Remove="Dataset\TrainedModels\model_9.csv" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="Dataset\TestModels\mnist_test.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Dataset\TrainedModels\model_0.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Dataset\TrainedModels\model_1.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Dataset\TrainedModels\model_2.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Dataset\TrainedModels\model_3.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Dataset\TrainedModels\model_4.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Dataset\TrainedModels\model_5.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Dataset\TrainedModels\model_6.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Dataset\TrainedModels\model_7.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Dataset\TrainedModels\model_8.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Dataset\TrainedModels\model_9.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
