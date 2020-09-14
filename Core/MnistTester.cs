@@ -43,11 +43,14 @@ namespace Core
 
             List<TrainedData> trainedData =  await LoadTrainedData(trainedDir);
 
-            MnistReader reader = new MnistReader(testDataset);
-            foreach(MnistDataSet current in reader)
+            IEnumerable<int[]> reader = new CsvReader(testDataset);
+            foreach(int[] array in reader)
             {
-                var histo = LBPGenerator.Calculate(current.Values);
-                var flattenedHistogram = SectionedHistogram.WithSections(histo, 7, 7).CombineSections();
+                var (Label, Matrix) = array.CreateMatrixAndExtractLabel();
+                var lpb = LBPGenerator.Calculate(Matrix);
+
+                int[][] sectionedHistogram = lpb.CreateHistogram(7,7);
+                var flattenedHistogram = sectionedHistogram.Flatten();
 
                 // compare it to each labeledSamples
                 // can be done on seperate threads
@@ -55,19 +58,19 @@ namespace Core
 
                 // get k nearest neighbors
                 int guessedLabel = CalculateLabel(labeledDistances);
-                if (guessedLabel == current.Label)
+                if (guessedLabel == Label)
                 {
                     correctGuesses++;
                 }
                 else
                 {
-                    if (incorrectGuessesForLabel.TryGetValue(current.Label, out int g))
+                    if (incorrectGuessesForLabel.TryGetValue(Label, out int g))
                     {
-                        incorrectGuessesForLabel[current.Label] = g + 1;
+                        incorrectGuessesForLabel[Label] = g + 1;
                     }
                     else
                     {
-                        incorrectGuessesForLabel.Add(current.Label, 1);
+                        incorrectGuessesForLabel.Add(Label, 1);
                     }
                     incorrectGuesses++;
                 }

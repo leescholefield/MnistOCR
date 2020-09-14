@@ -22,7 +22,7 @@ namespace Core
             return Task.Run(() => 
             {
                 List<int[]> selectedHistograms = new List<int[]>(sampleSize);
-                TrainedReader reader = new TrainedReader(fileName);
+                IEnumerable<int[]> reader = new CsvReader(fileName);
                 foreach (int[] histo in reader.Take(sampleSize))
                 {
                     selectedHistograms.Add(histo);

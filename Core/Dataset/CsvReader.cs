@@ -6,20 +6,22 @@ using System.Linq;
 
 namespace Core.Dataset
 {
-    public class TrainedReader : IEnumerable<int[]>
+    /// <summary>
+    /// Reads a CSV file containing a comma-seperated list of ints and converts them to an array
+    /// </summary>
+    public class CsvReader : IEnumerable<int[]>
     {
 
         private readonly string _filePath;
 
-        public TrainedReader(string filePath)
+        public CsvReader(string filePath)
         {
             _filePath = filePath;
         }
 
-
         public IEnumerator<int[]> GetEnumerator()
         {
-            return new TrainedEnumerator(_filePath);
+            return new CsvEnumerator(_filePath);
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -28,34 +30,35 @@ namespace Core.Dataset
         }
     }
 
-    public class TrainedEnumerator : IEnumerator<int[]>
+    public class CsvEnumerator : IEnumerator<int[]>
     {
 
         private readonly StreamReader _reader;
 
-        public TrainedEnumerator(string filePath)
+        public CsvEnumerator(string filePath)
         {
             _reader = new StreamReader(filePath);
         }
 
-        #region Current Imp
+        #region Current
 
         private int[] _current;
         public int[] Current
         {
-            get {
+            get
+            {
                 if (_reader == null || _current == null)
                     throw new InvalidOperationException();
 
                 return _current;
-             }
+            }
         }
 
         private object Current1
         {
             get
             {
-                return _current;
+                return Current;
             }
         }
 
@@ -93,6 +96,7 @@ namespace Core.Dataset
         }
 
         #region IDisposable Support
+
         private bool disposedValue = false; // To detect redundant calls
 
         protected virtual void Dispose(bool disposing)
@@ -101,31 +105,33 @@ namespace Core.Dataset
             {
                 if (disposing)
                 {
-                    // TODO: dispose managed state (managed objects).
+                    // no managed state
                 }
 
-                // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
-                // TODO: set large fields to null.
+                // un managed state
+                _current = null;
+                if (_reader != null)
+                {
+                    _reader.Close();
+                    _reader.Dispose();
+                }
 
                 disposedValue = true;
             }
         }
 
-        // TODO: override a finalizer only if Dispose(bool disposing) above has code to free unmanaged resources.
-        // ~TrainedEnumerator()
-        // {
-        //   // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
-        //   Dispose(false);
-        // }
+        ~CsvEnumerator()
+        {
+           Dispose(false);
+        }
 
         // This code added to correctly implement the disposable pattern.
         public void Dispose()
         {
-            // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
             Dispose(true);
-            // TODO: uncomment the following line if the finalizer is overridden above.
-            // GC.SuppressFinalize(this);
+            GC.SuppressFinalize(this);
         }
+
         #endregion
     }
 }

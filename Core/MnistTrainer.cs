@@ -1,6 +1,5 @@
 ﻿using Core.Dataset;
 using Core.Math;
-using CsvHelper;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -36,26 +35,27 @@ namespace Core
                 labeledHistograms[i] = new List<int[]>();
             }
 
-            foreach (var val in dataSet)
+            foreach (var (Label, Matrix) in dataSet)
             {
-                int[,] lbp = LBPGenerator.Calculate(val.Values);
-                val.Values = lbp;
+                int[,] lbp = LBPGenerator.Calculate(Matrix);
 
-                SectionedHistogram histo = SectionedHistogram.WithSections(val.Values, 7, 7);
-                int[] combinedHisto = histo.CombineSections();
-                labeledHistograms[val.Label].Add(combinedHisto);    
+                int[][] histo = lbp.CreateHistogram();
+                int[] combinedHisto = histo.Flatten();
+
+                labeledHistograms[Label].Add(combinedHisto);    
             }
 
             DumpHistogramsToFile(labeledHistograms, outputLocation);
         }
 
-        private List<MnistDataSet> LoadDataSet(string loc)
+        private List<(int Label, int[,] Matrix)> LoadDataSet(string loc)
         {
-            List<MnistDataSet> result = new List<MnistDataSet>();
-            MnistReader reader = new MnistReader(loc);
-            foreach (MnistDataSet data in reader)
+            List<(int, int[,])> result = new List<(int, int[,])>();
+            IEnumerable<int[]> reader = new CsvReader(loc);
+            foreach (int[] data in reader)
             {
-                result.Add(data);
+                var r = data.CreateMatrixAndExtractLabel();
+                result.Add(r);
             }
 
             return result;

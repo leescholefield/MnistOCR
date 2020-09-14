@@ -5,7 +5,7 @@ namespace Core.Math
     /// <summary>
     /// Contains useful extension methods for a matrix (C# MultidimensionalArray type).
     /// </summary>
-    public static class MatrixExtensionMethods
+    public static class MatrixExtensions
     {
 
         /// <summary>
@@ -65,5 +65,7 @@ namespace Core.Math
 
             return result;
         }
+
+
     }
 }
