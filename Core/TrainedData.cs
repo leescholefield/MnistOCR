@@ -1,4 +1,5 @@
 ﻿using Core.Dataset;
+using Core.Math.Distance;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,6 +13,8 @@ namespace Core
     /// </summary>
     public class TrainedData
     {
+
+        private IDistanceCalculator DistanceCalculator = new EuclideanDistanceCalculator();
 
         public int Label { get; private set; }
 
@@ -40,29 +43,14 @@ namespace Core
         {
             return Task.Run(() =>
             {
-                List<double> result = new List<double>();
-                foreach (var t in Histograms)
-                {
-                    double distance = GetDistance(target, t);
-                    result.Add(distance);
-                }
+                var result = DistanceCalculator.Calculate(Histograms, target);
+                result.Wait();
 
-                result.Sort();
-                return (Label, result);
+                List<double> distances = result.Result;
+                // sort the distances in ascending order
+                distances.Sort();
+                return (Label, distances);
             });
         }
-
-        private double GetDistance(int[] first, int[] second)
-        {
-            double distance = 0;
-            for (int i = 0; i < first.Length; i++)
-            {
-                int diff = second[i] - first[i];
-                distance += diff * diff;
-            }
-            distance = System.Math.Sqrt(distance);
-            return distance;
-        }
-
     }
 }

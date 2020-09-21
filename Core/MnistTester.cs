@@ -53,7 +53,6 @@ namespace Core
                 var flattenedHistogram = sectionedHistogram.Flatten();
 
                 // compare it to each labeledSamples
-                // can be done on seperate threads
                 Dictionary<int, List<double>> labeledDistances = await CalculateDistanceForEach(trainedData, flattenedHistogram);
 
                 // get k nearest neighbors
