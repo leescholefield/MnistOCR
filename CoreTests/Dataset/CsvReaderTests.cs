@@ -4,15 +4,15 @@ namespace Core.Dataset.Tests
 {
     [TestClass()]
     [DeploymentItem("TestData/trained.csv")]
-    public class TrainedReaderTests
+    public class CsvReaderTests
     {
 
-        private static TrainedReader Reader;
+        private static CsvReader Reader;
 
         [ClassInitialize()]
         public static void ClassInitialize(TestContext _)
         {
-            Reader = new TrainedReader("trained.csv");
+            Reader = new CsvReader("trained.csv");
         }
 
         [TestMethod()]

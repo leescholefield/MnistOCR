@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Core.Tests
 {
     [TestClass()]
-    public class HistrogramTests
+    public class HistrogramExtensionsTests
     {
         [TestMethod()]
         public void WithSections_Has_Correct_NumberOfSections()
@@ -12,8 +12,8 @@ namespace Core.Tests
             int[,] testMatrix = new int[28, 28];
             int expectedSections = 16;
 
-            var hist = SectionedHistogram.WithSections(testMatrix, 7, 7);
-            Assert.AreEqual(expectedSections, hist.NumberOfSections);
+            int[][] hist = testMatrix.CreateHistogram(7, 7);
+            Assert.AreEqual(expectedSections, hist.Length);
         }
 
         [TestMethod()]
@@ -26,9 +26,9 @@ namespace Core.Tests
 
             var expectedResult = 3;
 
-            var hist = SectionedHistogram.WithSections(matrix, 7, 7);
+            int[][] hist = matrix.CreateHistogram(7, 7);
 
-            Assert.AreEqual(expectedResult, hist.Sections[0][12]);
+            Assert.AreEqual(expectedResult, hist[0][12]);
         }
 
         [TestMethod()]
@@ -36,24 +36,24 @@ namespace Core.Tests
         {
             int[,] matrix = new int[28, 28];
 
-            var hist = SectionedHistogram.WithSections(matrix, 7, 7);
+            var hist = matrix.CreateHistogram(7, 7);
             var expectedResult = 49; // 7 * 7
 
             // since it counts each sections pixels and each pixel is set to 0 this should be be a short hand to 
             // get total pixel count
-            Assert.AreEqual(expectedResult, hist.Sections[0][0]);
+            Assert.AreEqual(expectedResult, hist[0][0]);
         }
 
         [TestMethod()]
         public void Sections_Have_Expected_Combined_Length()
         {
             int[,] matrix = new int[28, 28];
-            var hist = SectionedHistogram.WithSections(matrix, 7, 7);
+            var hist = matrix.CreateHistogram(7, 7);
 
             int expected = 16 * 256;
 
             int actual = 0;
-            foreach (var i in hist.Sections)
+            foreach (var i in hist)
             {
                 actual += i.Length;
             }
@@ -66,8 +66,8 @@ namespace Core.Tests
         public void CombineSections_Produces_Array_Of_Expected_Size()
         {
             int[,] matrix = new int[28, 28];
-            var hist = SectionedHistogram.WithSections(matrix, 7, 7);
-            var result = hist.CombineSections();
+            var hist = matrix.CreateHistogram(7, 7);
+            var result = hist.Flatten();
             
             Assert.AreEqual(16 * 256, result.Length);
         }
